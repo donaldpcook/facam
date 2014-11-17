@@ -16,10 +16,14 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <!-- // <script src="cordova.js"></script> -->
 
     <!-- your app's js -->
+    
     <script src="js/app.js"></script>
+    <script src="js/services/facepp.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="js/images/images.js" type="text/javascript" charset="utf-8"></script>
   </head>
   <body ng-app="starter">
 
@@ -28,6 +32,62 @@
         <h1 class="title">Ionic Blank Starter</h1>
       </ion-header-bar>
       <ion-content>
+        <div ng-controller="ImagesCtrl" >
+        
+        
+        
+          {{results()}}
+          <form ng-submit="appendImage(appendImageField)">
+            <input type="text" name="appendImage" ng-model="appendImageField" value="{{appendImageField}}" />
+                      
+            <div class="button" ng-click="appendImage(appendImageField)">append Urls</div>
+          </form>
+          {{images}}
+          <p>Source</p>
+          svg
+          <div id="fppSvgWrapper">
+            <svg id="fppSvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink" height="{{svg.height()}}" width="{{svg.width()}}">
+              <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+              
+              <g ng-repeat="image in images" data-class="{{image}}">
+                <image  xlink:href="{{image}}" x="{{svg.getImageX($index)}}" y="{{svg.getImageY($index)}}" height="{{svg.getImageHeight($index)}}" width="{{svg.getImageWidth($index)}}"/>
+              </g>
+            </svg>
+          </div>
+          /svg
+          <canvas id="fppCanvas">
+            
+          </canvas>
+          <form ng-submit="submitImages($event)" name="imageForm" method="POST" action="https://image-appender.herokuapp.com" enctype="multipart/form-data">
+            
+            <div class="imageWrapper" ng-repeat="image in images" >
+              <img class="image source" src="{{image}}"/>
+            </div>
+            <input style="" type="file" src="{{image}}" ng-hide/>
+            <input type="submit"/>
+          </form>
+          <hr/>
+
+          <p>Result</p>
+          <img class="image result" ng-src="{{result}}"/>
+        </div>
+        
+        
+        
+        <button id="openCustomCameraBtn">Open Custom Camera</button>
+        <img id="photoImg" style="position: fixed; top: 0; width: 50%; left: 25%;" />
+        <script>
+          document.getElementById("openCustomCameraBtn").addEventListener("click", function(){
+            alert("Event Listener: Click: #openCustomCameraBtn");
+            navigator.FaCamera.getPicture(function(imagePath){
+              alert("get picture success. Image Path: " + imagePath);
+              document.getElementById("photoImg").setAttribute("src", imagePath);
+            }, function(){
+              alert("get picture failure.");
+              alert("Photo cancelled");
+            });
+          }, false);
+        </script>
       </ion-content>
     </ion-pane>
   </body>

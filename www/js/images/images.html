@@ -1,0 +1,13 @@
+{{results()}}
+
+<input type="text" name="appendImage" ng-model="appendImageField" value="{{appendImageField}}" />
+
+{{appendImageField}}
+
+<p>Source</p>
+
+<img class="image source" ng-repeat="image in images" src="{{image}}"/>
+<hr/>
+
+<p>Result</p>
+<img class="image result" ng-src="{{result}}"/>
