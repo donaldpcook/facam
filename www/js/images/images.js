@@ -1,7 +1,7 @@
 /* global module: false */
 
 //Controller
-angular.module('starter').controller("ImagesCtrl", function($scope, $timeout, $sce, FacePPService) {
+angular.module('starter').controller("ImagesCtrl", function($scope, $timeout, $sce) {
 	'use strict';
 
   $scope.images = ["http://placehold.it/150x300/&text=1", "http://placehold.it/3000x150/&text=2", "http://placehold.it/300x300/&text=3"];
