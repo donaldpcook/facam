@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.home > button {
+  height: 300px;
+}

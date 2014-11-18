@@ -1,7 +1,7 @@
 /* global module: false */
 
 //Controller
-angular.module('starter').controller("ImagesCtrl", function($scope, $timeout, $sce) {
+angular.module('facam').controller("ImagesCtrl", function($scope, $timeout, $sce) {
 	'use strict';
 
   $scope.images = ["http://placehold.it/150x300/&text=1", "http://placehold.it/3000x150/&text=2", "http://placehold.it/300x300/&text=3"];
@@ -127,9 +127,12 @@ angular.module('starter').controller("ImagesCtrl", function($scope, $timeout, $s
     canvas.height = $scope.svg.height();
     canvas.width = $scope.svg.width();
     var images = [];
+    $scope.images.forEach(function(image) {
+
+    });
     for(var i = 0; i < $scope.images.length; i++){
       images[i] = new Image();
-      images[i].onload = function(){
+      images[i].onload = (function(){
         var index = $scope.svg.getIndexByUrl(this.src);
         context.drawImage(this, $scope.svg.getImageX(index), $scope.svg.getImageY(index));
       };

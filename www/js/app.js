@@ -4,14 +4,29 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('facam', ['ionic'])
-.config(function ($sceDelegateProvider) {
+.config(function ($sceDelegateProvider, $stateProvider, $urlRouterProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
       // Allow same origin resource loads.
       'self',
       // Allow loading from our assets domain.  Notice the difference between * and **.
       'http://placehold.it/**'
     ]);
+
+  $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'js/home/home.html',
+      controller: 'HomeController'
+    })
+    //.state('main', {
+      //url: '/main',
+      //templateUrl: 'templates/main.html',
+      //controller: 'MainCtrl'
+    //});
+
+  $urlRouterProvider.otherwise("/");
 })
+
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -27,22 +42,7 @@ angular.module('facam', ['ionic'])
   });
 })
 
-.controller('app', function(file) {
-  document.getElementById("openCustomCameraBtn").addEventListener("click", function(){
-    alert("Event Listener: Click: #openCustomCameraBtn");
-    var images = [];
-    navigator.FaCamera.getPicture(function(imagePath){
-      file.resolveLocalFileSystemUrl(imagePath).then(function(result) {
-        file.convertToBlob(result).then(function(blob) {
-          images.push(blob);
+.controller('app', function() {
 
-          //if (images.length === 3) {
-            //file.postFiles('https://image-appender.herokuapp.com/', images).then(function(response) {
-            //});
-          //}
-        });
-      });
-    });
-  });
 });
 
