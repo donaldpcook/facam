@@ -22,7 +22,7 @@
       };
 
       $scope.finish = function() {
-        debugger;
+//        debugger;
 
         svg.getBlob();
 

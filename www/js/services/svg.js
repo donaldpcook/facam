@@ -151,10 +151,12 @@ angular.module('facam')
           image.src = imageUrl;
         });
 
+        
+
         //TODO: make this better, but need to make sure that svg is completely drawn
         setTimeout(function() {
           debugger;
-          deferred.resolve(canvas.toBlob());
+          //deferred.resolve(canvas.toBlob());
         }, 1000);
 
         return deferred.promise;
