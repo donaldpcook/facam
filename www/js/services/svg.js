@@ -127,8 +127,63 @@ angular.module('facam')
         return y;
       }
     }
-
+    
+    
     return {
+      imageForCoordinate : function (x, y) {
+         if (x<0 || x == undefined) {
+           console.log('imageForCoordinate: X was less than zero or undefined');
+           if (images[0] !== undefined) {
+             return images[0];
+           }else{
+             return null;
+           }
+         }
+         if (y < 0 || y == undefined) {
+           console.log('imageForCoordinate: Y was less than zero or undefined');
+           if (images[0] !== undefined) {
+             return images[0];
+           }else{
+             return null;
+           }
+         }
+         if (x > svg.height()) {
+           console.log('imageForCoordinate: X was larger than svg.height()');
+           if (images[0] !== undefined) {
+             return images[0];
+           }else{
+             return null;
+           }
+         }
+         if (y > svg.width()) {
+           console.log('imageForCoordinate: Y was larger than svg.width()');
+           if (images[0] !== undefined) {
+             return images[0];
+           }else{
+             return null;
+           }
+         }
+
+
+         //after validation our x and y
+         var searchX = 0;
+         var searchY = 0;
+
+         for (var i = 0; i < images.length; i++) {
+           var image = images[i];
+           var index = svg.getIndexByUrl(image);
+           var meta = svg.getImageMetadataByIndex(index);
+
+           if (searchY < y && (searchY + meta.height) >= y){
+             console.log('Found one: [' + index + '] = ' + image);
+             return image;
+           }
+           searchY = searchY + meta.height;
+           debugger;
+         }
+       },
+           
+      
       getBlob: function(originalImages) {
         images = originalImages;
 
