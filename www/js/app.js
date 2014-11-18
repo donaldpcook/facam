@@ -18,11 +18,11 @@ angular.module('facam', ['ionic'])
       templateUrl: 'js/home/home.html',
       controller: 'HomeController'
     })
-    //.state('main', {
-      //url: '/main',
-      //templateUrl: 'templates/main.html',
-      //controller: 'MainCtrl'
-    //});
+    .state('results', {
+      url: '/results',
+      templateUrl: 'js/results/results.html',
+      controller: 'ResultsCtrl'
+    });
 
   $urlRouterProvider.otherwise("/");
 })
