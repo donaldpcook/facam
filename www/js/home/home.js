@@ -3,11 +3,9 @@
 
   angular.module('facam')
     .controller('HomeController', function($scope, file, svg) {
-      var images = [];
-
       $scope.startCamera = function() {
         navigator.FaCamera.getPicture(function(imagePath){
-          images.push(imagePath);
+          svg.addImage('file://' + imagePath);
           //file.resolveLocalFileSystemUrl(imagePath).then(function(result) {
             //file.convertToBlob(result).then(function(blob) {
               //images.push(blob);
@@ -27,7 +25,7 @@
         svg.getBlob();
 
         setTimeout(function() {
-          document.getElementById('test').appendChild(canvas);
+          //document.getElementById('test').appendChild(canvas);
         }, 1000);
       };
     });
