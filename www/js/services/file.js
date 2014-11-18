@@ -31,16 +31,26 @@ angular.module('facam')
       },
 
       // files must be array of Blobs
-      postFiles: function(url, files) {
+      postFiles: function(url, files, params) {
         var deferred = $q.defer();
         var formData = new FormData();
 
         if (!url || !files) {
           deferred.reject('URL and Images required');
         } else {
-          files.forEach(function(imageBlob) {
-            formData.append('img', imageBlob, 'test.png');
+          files.forEach(function(image) {
+            if (typeof image === 'string') {
+              formData.append('url', image);
+            } else {
+              formData.append('img', image, 'test.png');
+            }
           });
+
+          for (var prop in params) {
+            if (params.hasOwnProperty(prop)) {
+              formData.append(prop, params[prop]);
+            }
+          }
 
           var xhr = new XMLHttpRequest();
           xhr.open('POST', url, true);
