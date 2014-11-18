@@ -7,12 +7,12 @@
   <author email="graham.heath@rga.com" href="http://rga.com">
 		R/GA
   </author>
-	<icon src="res/icon.jpg" />
+	<icon src="res/icon.png" />
   <platform name="ios">
     <!-- iOS 7.0+ -->
     <!-- iPhone / iPod Touch  -->
-    <icon src="res/ios/icon.ios.jpg" width="60" height="60" />
-    <icon src="res/ios/icon@2x.jpg" width="120" height="120" />
+    <icon src="res/ios/icon.png" width="60" height="60" />
+    <icon src="res/ios/icon@2x.png" width="120" height="120" />
 	</platform>
   <content src="index.html"/>
   <access origin="*"/>
