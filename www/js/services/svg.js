@@ -62,7 +62,7 @@ angular.module('facam')
 
       height: function () {
         var height = 0;
-        angular.forEach(svg.imageMetadata, function (value,key) {
+        angular.forEach(images, function (value,key) {
           if(value.height){
             height += value.height;
           }else{
@@ -74,7 +74,7 @@ angular.module('facam')
 
       width: function () {
         var width = 0;
-        angular.forEach(svg.imageMetadata, function (value,key) {
+        angular.forEach(images, function (value,key) {
           if (value.width) {
             if (width<value.width) {
               width = value.width;
@@ -104,60 +104,66 @@ angular.module('facam')
       },
 
       getImageY: function (index) {
-        var image = svg.getImageMetadataByIndex(index);
         var y = 0;
-        if (image!==null){
-          if(index>0){
-            //not the first image
-            for (var i = index-1; i >= 0; i--) {
-              var priorImageMetadata = svg.getImageMetadataByIndex(i);
-              if (priorImageMetadata.height != undefined) {
-                y += priorImageMetadata.height;
-              }
-            }
-            return y;
-          }else{
-            return y;
+        images.forEach(function(img, idx) {
+          if (idx < index) {
+            y += img.height;
           }
-        }
+        });
+        //var image = svg.getImageMetadataByIndex(index);
+        //var y = 0;
+        //if (image!==null){
+          //if(index>0){
+            ////not the first image
+            //for (var i = index-1; i >= 0; i--) {
+              //var priorImageMetadata = svg.getImageMetadataByIndex(i);
+              //if (priorImageMetadata.height != undefined) {
+                //y += priorImageMetadata.height;
+              //}
+            //}
+            //return y;
+          //}else{
+            //return y;
+          //}
+        //}
         
         return y;
       }
     }
 
     return {
-      getBlob: function(originalImages) {
-        images = originalImages;
-
+      getBlob: function() {
         var deferred = $q.defer();
 
         //mock!
-        images = ["http://placehold.it/150x300/&text=1", "http://placehold.it/3000x150/&text=2", "http://placehold.it/300x300/&text=3"];
-
         var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
 
         canvas.height = svg.height();
         canvas.width = svg.width();
 
-        images.forEach(function(imageUrl, idx) {
-          var image = new Image();
-          image.onload = function(){
-            context.drawImage(this, idx * 50, 0);
-          };
-
-          //use this instead of inside of app
-          //image.src = 'file://' + imageUrl;
-          image.src = imageUrl;
+        images.forEach(function(imageEl, idx) {
+          context.drawImage(imageEl, svg.getImageX(idx), svg.getImageY(idx));
         });
 
         //TODO: make this better, but need to make sure that svg is completely drawn
         setTimeout(function() {
-          debugger;
-          deferred.resolve(canvas.toBlob());
+          document.getElementById('test').appendChild(canvas);
+          //deferred.resolve(canvas.toBlob());
         }, 1000);
 
         return deferred.promise;
+      },
+
+      addImage: function(imagePath) {
+        var image = new Image();
+
+        image.onload = function() {
+          images.push(this);
+        };
+
+        //use this instead of inside of app
+        image.src = imagePath;
       }
     };
   })
