@@ -3,6 +3,9 @@
 angular.module('facam')
   .factory('svg', function($q) {
     var images = [];
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    
     var svg = {
       imageMetadata : {},
 
@@ -134,9 +137,7 @@ angular.module('facam')
         //mock!
         images = ["http://placehold.it/150x300/&text=1", "http://placehold.it/3000x150/&text=2", "http://placehold.it/300x300/&text=3"];
 
-        var canvas = document.createElement('canvas');
-        var context = canvas.getContext('2d');
-
+        
         canvas.height = svg.height();
         canvas.width = svg.width();
 
