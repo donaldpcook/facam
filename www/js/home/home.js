@@ -20,13 +20,11 @@
       };
 
       $scope.finish = function() {
-//        debugger;
-
-        svg.getBlob();
-
-        setTimeout(function() {
-          //document.getElementById('test').appendChild(canvas);
-        }, 1000);
+        svg.getBlob().then(function(blob) {
+          file.postFiles('https://image-appender.herokuapp.com/', [blob, blob]).then(function(response) {
+            debugger;
+          })
+        });
       };
     });
 }());
