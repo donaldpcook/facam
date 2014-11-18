@@ -21,7 +21,7 @@
 
       $scope.finish = function() {
         svg.getBlob().then(function(blob) {
-          file.postFiles('', [blob]).then(function(response) {
+          file.postFiles('https://image-appender.herokuapp.com/', [blob, blob]).then(function(response) {
             debugger;
           })
         });
