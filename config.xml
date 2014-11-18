@@ -2,11 +2,18 @@
 <widget id="com.ionicframework.facam526793" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>facam</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
-    </author>
+      Facam is a camera app that chooses the best photo in a series by looking for happy faces.
+  </description>
+  <author email="graham.heath@rga.com" href="http://rga.com">
+		R/GA
+  </author>
+	<icon src="res/icon.jpg" />
+  <platform name="ios">
+    <!-- iOS 7.0+ -->
+    <!-- iPhone / iPod Touch  -->
+    <icon src="res/ios/icon.ios.jpg" width="60" height="60" />
+    <icon src="res/ios/icon@2x.jpg" width="120" height="120" />
+	</platform>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
