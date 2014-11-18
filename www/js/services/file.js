@@ -39,7 +39,7 @@ angular.module('facam')
           deferred.reject('URL and Images required');
         } else {
           files.forEach(function(imageBlob) {
-            formData.append('images', imageBlob, 'test.png');
+            formData.append('img', imageBlob, 'test.png');
           });
 
           var xhr = new XMLHttpRequest();
