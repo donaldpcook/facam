@@ -144,7 +144,8 @@ angular.module('facam')
         images.forEach(function(imageUrl, idx) {
           var image = new Image();
           image.onload = function(){
-            context.drawImage(this, idx * 50, 0);
+            var index = svg.getIndexByUrl(this.src);
+            context.drawImage(this, svg.getImageX(index), svg.getImageY(index));
           };
 
           //use this instead of inside of app
