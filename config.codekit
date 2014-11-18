@@ -176,16 +176,14 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/www\/js\/home\/home.js": {
-		"fileType": 64,
+	"\/www\/js\/home\/home.html": {
+		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/www\/js\/home\/home.js",
-		"outputAbbreviatedPath": "\/www\/js\/home\/min\/home-min.js",
+		"inputAbbreviatedPath": "\/www\/js\/home\/home.html",
+		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
+		"outputPathIsSetByUser": 0
 		},
 	"\/www\/js\/home\/min\/home-min.js": {
 		"fileType": 64,
@@ -266,17 +264,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/www\/js\/services\/min\/svg-min.js",
 		"outputAbbreviatedPath": "\/www\/js\/services\/min\/min\/svg-min-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/www\/js\/services\/svg.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/www\/js\/services\/svg.js",
-		"outputAbbreviatedPath": "\/www\/js\/services\/min\/svg-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
