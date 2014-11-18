@@ -127,9 +127,12 @@ angular.module('facam').controller("ImagesCtrl", function($scope, $timeout, $sce
     canvas.height = $scope.svg.height();
     canvas.width = $scope.svg.width();
     var images = [];
+    $scope.images.forEach(function(image) {
+
+    });
     for(var i = 0; i < $scope.images.length; i++){
       images[i] = new Image();
-      images[i].onload = function(){
+      images[i].onload = (function(){
         var index = $scope.svg.getIndexByUrl(this.src);
         context.drawImage(this, $scope.svg.getImageX(index), $scope.svg.getImageY(index));
       };
