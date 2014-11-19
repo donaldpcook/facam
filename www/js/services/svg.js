@@ -3,6 +3,7 @@
 angular.module('facam')
   .factory('svg', function($q) {
     var images = [];
+    var imageCoordinates;
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
     
@@ -182,11 +183,80 @@ angular.module('facam')
 
            if (searchY < y && (searchY + meta.height) >= y){
              console.log('Found one: [' + index + '] = ' + image);
-             return image;
+             return {image: image, index: i};
            }
            searchY = searchY + meta.height;
-           debugger;
          }
+       },
+
+       setImageCoordinates: function() {
+         if (!images.length) return;
+
+         var imageWidth = 0;
+         var imageHeight = 0;
+
+         images.forEach(function(image) {
+           imageWidth = image.width;
+           imageHeight += image.height;
+         });
+
+         var coordinates = [[[[0,0]]]];
+
+         images.forEach(function(image, idx) {
+           var width = (image.width / imageWidth) * 100;
+           var height = (image.height / imageHeight) * 100;
+
+           if (idx === 0) {
+            coordinates[0][idx][1] = [width, height];
+           } else {
+             coordinates[0][idx] = [];
+             coordinates[0][idx][0] = [0, coordinates[0][idx - 1][1][1]];
+             coordinates[0][idx][1] = [coordinates[0][idx][0][0] + width, coordinates[0][idx][0][1] + height];
+           }
+         })
+
+         imageCoordinates = coordinates;
+       },
+
+       getImageIndex: function(x, y) {
+         var index;
+
+         imageCoordinates[0].forEach(function(el, idx) {
+           if ((x > el[0][0] && x < el[1][0]) && (y > el[0][1] && y < el[1][1])) {
+             index = idx;
+           }
+         });
+
+         return index;
+         //var test = imageCoordinates.filter(function(coordinates, idx) {
+           //var test = coordinates.filter(function(coor, idx) {
+             //return ((x > coor[0][0] && x < coor[1][0]) && (y > coor[0][1] && y < coor[1][1]));
+           //});
+         //});
+       },
+
+       getImage: function(x, y) {
+         if (!images.length || !x || !y) {
+           return;
+         }
+
+         var arrayOfX = [];
+         var arrayOfY = [];
+
+         images.forEach(function(image) {
+           if (!arrayOfX.length) {
+             arrayOfX.push(image.width);
+           } else {
+             var newX;
+
+             arrayOfX.forEach(function(el) {
+               newX += el;
+             });
+
+             newX += image.height;
+             arrayOfX.push(newX);
+           }
+         });
        },
            
       
@@ -224,8 +294,11 @@ angular.module('facam')
           images.push(this);
         };
 
-        //use this instead of inside of app
         image.src = imagePath;
+      },
+
+      getImageElement: function(idx) {
+        return images[idx];
       }
     };
   })
