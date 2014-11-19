@@ -10,3 +10,7 @@
 .home > button {
   height: 300px;
 }
+
+.results img {
+  width: 100%;
+}

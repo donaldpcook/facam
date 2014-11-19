@@ -12,6 +12,7 @@ angular.module('facam')
     }
 
     var faces = [];
+
     var Face = function(props) {
       this.properties = props;
       this.smilingValue = this.properties.attribute.smiling.value;
@@ -41,6 +42,41 @@ angular.module('facam')
         });
 
         return faces;
+      },
+
+      sortByImages: function() {
+        var images = [];
+
+        faces.forEach(function(face) {
+          if (!images[face.photo]) {
+            images[face.photo] = [];
+          }
+
+          images[face.photo].push(face);
+        });
+
+        return images;
+      },
+
+      sortBySmiles: function() {
+        var originalImages = svg.getImages();
+        var images = this.sortByImages();
+        var smileAverages = [];
+
+        images.forEach(function(image, idx) {
+          var smileTotal = 0;
+
+          image.forEach(function(face) {
+            smileTotal += face.smilingValue;
+          });
+
+          smileAverages[idx] = {
+            smileAverage: smileTotal / image.length,
+            img: originalImages[idx]
+          }
+        });
+
+        return smileAverages;
       }
     }
   });

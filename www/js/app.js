@@ -21,7 +21,7 @@ angular.module('facam', ['ionic'])
     .state('results', {
       url: '/results',
       templateUrl: 'js/results/results.html',
-      controller: 'ResultsCtrl'
+      controller: 'ResultsController'
     });
 
   $urlRouterProvider.otherwise("/");

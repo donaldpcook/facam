@@ -268,11 +268,11 @@ angular.module('facam')
         var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
 
-        canvas.height = svg.height();
-        canvas.width = svg.width();
+        canvas.height = svg.height() * .40;
+        canvas.width = svg.width() * .40;
 
         images.forEach(function(imageEl, idx) {
-          context.drawImage(imageEl, svg.getImageX(idx), svg.getImageY(idx));
+          context.drawImage(imageEl, svg.getImageX(idx) * .40, svg.getImageY(idx) * .40, imageEl.width * .40, imageEl.height * .40);
         });
 
         //TODO: make this better, but need to make sure that svg is completely drawn
@@ -280,8 +280,6 @@ angular.module('facam')
           canvas.toBlob(function(blob) {
             deferred.resolve(blob);
           }, 'image/png');
-
-          //deferred.resolve(canvas.toBlob());
         }, 1000);
 
         return deferred.promise;
@@ -299,6 +297,10 @@ angular.module('facam')
 
       getImageElement: function(idx) {
         return images[idx];
+      },
+
+      getImages: function() {
+        return images;
       }
     };
   })
