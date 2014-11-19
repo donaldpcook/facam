@@ -2,28 +2,18 @@
   'use strict';
 
   angular.module('facam')
-    .controller('HomeController', function($scope, file, svg) {
+    .controller('HomeController', function($scope, file, svg, face) {
       $scope.startCamera = function() {
         navigator.FaCamera.getPicture(function(imagePath){
           svg.addImage('file://' + imagePath);
-          //file.resolveLocalFileSystemUrl(imagePath).then(function(result) {
-            //file.convertToBlob(result).then(function(blob) {
-              //images.push(blob);
-
-              ////if (images.length === 3) {
-                ////file.postFiles('https://image-appender.herokuapp.com/', images).then(function(response) {
-                ////});
-              ////}
-            //});
-          //});
         });
-      };
 
-      $scope.finish = function() {
-        svg.getBlob().then(function(blob) {
-          file.postFiles('https://image-appender.herokuapp.com/', [blob, blob]).then(function(response) {
-            debugger;
-          })
+        navigator.FaCamera.onFinish(function() {
+          svg.getBlob().then(function(blob) {
+            face.detectFaces(blob).then(function(res) {
+              debugger;
+            });
+          });
         });
       };
     });
