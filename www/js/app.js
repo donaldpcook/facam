@@ -1,8 +1,3 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
 angular.module('facam', ['ionic'])
 .config(function ($sceDelegateProvider, $stateProvider, $urlRouterProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
@@ -13,8 +8,13 @@ angular.module('facam', ['ionic'])
     ]);
 
   $stateProvider
-    .state('home', {
+    .state('landing', {
       url: '/',
+      templateUrl: 'js/landing.html',
+      controller: 'AppController'
+    })
+    .state('home', {
+      url: '/home',
       templateUrl: 'js/home/home.html',
       controller: 'HomeController'
     })
@@ -42,7 +42,26 @@ angular.module('facam', ['ionic'])
   });
 })
 
-.controller('app', function() {
+.controller('AppController', function($state, $ionicPlatform, $ionicLoading, svg, face) {
+  $ionicPlatform.ready(function() {
+    navigator.FaCamera.getPicture(function(imagePath){
+      svg.addImage('file://' + imagePath);
+    });
 
+    navigator.FaCamera.onFinish(function() {
+      $ionicLoading.show({
+        template: '<div class="loading">Loading...</div>'
+      });
+
+      svg.setImageCoordinates();
+      svg.getBlob().then(function(blob) {
+        face.detectFaces(blob).then(function(res) {
+          face.setFaces(res);
+          $ionicLoading.hide();
+          $state.go('results');
+        });
+      });
+    });
+  });
 });
 

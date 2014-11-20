@@ -279,7 +279,7 @@ angular.module('facam')
         setTimeout(function() {
           canvas.toBlob(function(blob) {
             deferred.resolve(blob);
-          }, 'image/png');
+          }, 'image/jpeg', 0.4);
         }, 1000);
 
         return deferred.promise;
@@ -301,6 +301,13 @@ angular.module('facam')
 
       getImages: function() {
         return images;
+      },
+
+      resetImages: function() {
+        images = [];
+        imageCoordinates = [];
+        canvas = document.createElement('canvas');
+        context = canvas.getContext('2d');
       }
     };
   })

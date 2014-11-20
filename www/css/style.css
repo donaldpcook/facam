@@ -1,5 +1,9 @@
 /* Empty. Add your own CSS if you like */
 
+html, body {
+  background-color: #444;
+}
+
 .home {
   display: flex;
   align-items: center;
@@ -13,4 +17,8 @@
 
 .results img {
   width: 100%;
+}
+
+.results-best-title {
+  text-align: center;
 }

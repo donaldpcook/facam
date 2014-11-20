@@ -1,5 +1,20 @@
 <div class="results">
-  <img ng-src="{{image}}" />
+  <div class="bar bar-header bar-positive">
+    <button class="button" ng-click="retake()">Retake</button>
+    <h1 class="title">Facam</h1>
+    <button class="button" ng-click="saveAll()">Save All</button>
+  </div>
 
-  <button class="button button-block button-positive" ng-click="saveImage()">Save Image</button>
+  <div class="list card results-card" ng-repeat="image in images track by $index">
+    <div class="item" ng-if="$index===0">
+      <h2 class="results-best-title" ng-if="failed">Whoops, smile service failed. Here's your photos</h2>
+      <h2 class="results-best-title" ng-if="!failed">Here's the best photo!</h2>
+    </div>
+
+    <div class="item item-image">
+      <img ng-src="{{image.img.src}}" />
+    </div>
+
+    <a class="item assertive" href="" ng-click="saveImage(image.img.src)">Save Image</a>
+  </div>
 </div>

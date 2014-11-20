@@ -70,6 +70,7 @@ angular.module('facam')
             smileTotal += face.smilingValue;
           });
 
+          console.log(image, idx);
           smileAverages[idx] = {
             smileAverage: smileTotal / image.length,
             img: originalImages[idx]
