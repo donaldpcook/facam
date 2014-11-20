@@ -7,8 +7,8 @@
 
   <div class="list card results-card" ng-repeat="image in images track by $index">
     <div class="item" ng-if="$index===0">
-      <h2 class="results-best-title" ng-if="failed">Whoops, smile service failed. Here's your photos</h2>
-      <h2 class="results-best-title" ng-if="!failed">Here's the best photo!</h2>
+      <p class="results-best-title" ng-if="failed">Whoops, smile service failed. Here's your photos</p>
+      <h1 class="results-best-title" ng-if="!failed">Here's the best photo</h1>
     </div>
 
     <div class="item item-image">

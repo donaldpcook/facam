@@ -53,8 +53,7 @@
 
       var showPopup = function() {
         var popup = $ionicPopup.show({
-          template: '<div></div>',
-          title: 'Saved!',
+          template: '<span class="results-saved">Saved!</span>',
           scope: $scope
         });
 

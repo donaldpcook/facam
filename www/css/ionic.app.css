@@ -7825,6 +7825,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
 html, body {
   background-color: #000; }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'PT Sans'; }
+
 .landing {
   display: -webkit-box;
   display: -moz-box;
@@ -7864,7 +7867,14 @@ html, body {
     width: 100%; }
 
 .results-best-title {
-  text-align: center; }
+  text-align: center;
+  font-size: 24px;
+  padding-top: 5px; }
+
+.results-saved {
+  width: 100%;
+  text-align: center;
+  font-size: 18px; }
 
 .results-card {
   width: 100%;
